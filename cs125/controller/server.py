@@ -12,8 +12,7 @@ security.Security(app)
 handler.CustomException(app)
 app.log = logger
 app.blueprint(main.bp)
-security.PostSecurity(app)
 
 def start(loop = None):
     logger.info("Starting api server...")
-    app.run(host="192.168.0.100", port=8000, workers=config.workers, debug=True, loop=loop)
+    app.run(host=config.host, port=8000, workers=config.workers, debug=True, loop=loop)

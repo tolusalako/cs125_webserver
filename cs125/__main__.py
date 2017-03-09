@@ -2,7 +2,7 @@ import sys
 import time
 import config
 import asyncio
-from db import aws_util
+from db import es_util
 from controller import server
 
 try:
@@ -27,7 +27,7 @@ def __launch_process(func, args):
         process.daemon = True #TODO custom id?
         process.start()
         processes.append(process)
-    
+
     for process in processes:
         process.join()
 
@@ -44,10 +44,10 @@ def __kill_processes():
 
 if __name__ == '__main__':
     __handle_args()
-    aws_util.setup()
-    loop = async_loop.new_event_loop()
-    asyncio.set_event_loop(loop)
-
-    #TODO run nest in a different process with x process counts
-    print("Run run run")
-    server.start(loop)
+    es_util.setup()
+    # loop = async_loop.new_event_loop()
+    # asyncio.set_event_loop(loop)
+    #
+    # #TODO run nest in a different process with x process counts
+    # print("Run run run")
+    # server.start(loop)

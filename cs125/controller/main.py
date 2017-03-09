@@ -3,8 +3,6 @@ from sanic import Blueprint
 from sanic.views import HTTPMethodView
 from sanic.exceptions import InvalidUsage, NotFound
 
-from models.model import Report
-from db import db_service
 from .exception.exceptions import QuotaError
 import log
 import config
@@ -31,6 +29,8 @@ class StoreView(HTTPMethodView):
 
 
 class FetchView(HTTPMethodView):
+    def get(self, request, id):
+        return text("You're cool")
     def delete(self, request, id):
         id = parse_id(id)
         if (id is None):

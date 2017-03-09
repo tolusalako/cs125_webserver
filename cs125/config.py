@@ -2,33 +2,23 @@
 import logging
 
 
-'''
-All times are in seconds
-'''
+host = "192.168.0.69"
+
+elastic_search = {
+    'host': '192.168.0.10',
+    'index': 'cs125'
+}
+
+
 
 #======Controller============
 workers = 1
 
-#============Cor==============
-cor_origins = "*"
-cor_methods = 'POST, GET'
-cor_headers = 'Authorization, Content-Type'
-cor_creds = 'true'
-cor_max_age = '300'
+
 
 #==========Versions============
 versions = {
     'controller': 1.0,
-}
-
-
-#==========Databases===============
-db = 'dynamodb'
-
-# Dynamo DB
-dynamo_throughput = {
-    'ReadCapacityUnits': 5,
-    'WriteCapacityUnits': 5
 }
 
 

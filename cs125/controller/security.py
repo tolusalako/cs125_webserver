@@ -3,7 +3,6 @@ import log
 from .exception import exceptions
 import base64
 import config
-from .cors import add_cors
 
 logger = log.get_logger(__name__)
 AUTH_KEY = "Authorization"
@@ -25,10 +24,3 @@ class Security():
             _, key = auth.split()
             if (key is None or key == ""):
                 raise exceptions.Forbidden()
-
-class PostSecurity():
-    ''' Handles outgoing responses '''
-    def __init__(self, app):
-        @app.middleware('response')
-        async def cors_middleware(request, response):
-            add_cors(response)

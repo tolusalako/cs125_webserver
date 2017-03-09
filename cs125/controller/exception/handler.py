@@ -1,9 +1,7 @@
 from sanic.response import json
 from sanic.exceptions import SanicException, InvalidUsage, NotFound
-from cassandra.cqlengine.query import DoesNotExist
 from controller import main
 from . import exceptions
-from controller.cors import add_cors
 import log
 logger = log.get_logger(__name__)
 
@@ -22,11 +20,6 @@ def sanic_exception_invalid(request, exception):
 @main.bp.exception(ValueError)
 def value_error(request, exception):
     return return_response('Found unexpected value', 400)
-
-@main.bp.exception(DoesNotExist)
-def dne_exception(request, exception):
-    return return_response('Nothing found', 404)
-
 
 
 
@@ -49,5 +42,4 @@ class CustomException():
 
 def return_response(message, status_code):
     response = json({"error": message}, status_code)
-    add_cors(response)
     return response
