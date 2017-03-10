@@ -10,6 +10,9 @@ elastic_search = {
 }
 
 
+enable_security = False
+
+
 
 #======Controller============
 workers = 1

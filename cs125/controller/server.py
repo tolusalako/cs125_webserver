@@ -8,7 +8,9 @@ import config
 logger = log.get_logger(__name__)
 
 app = Sanic("CS125")
-security.Security(app)
+
+if (config.enable_security):
+    security.Security(app)
 handler.CustomException(app)
 app.log = logger
 app.blueprint(main.bp)

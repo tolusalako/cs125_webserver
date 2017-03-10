@@ -45,9 +45,9 @@ def __kill_processes():
 if __name__ == '__main__':
     __handle_args()
     es_util.setup()
-    # loop = async_loop.new_event_loop()
-    # asyncio.set_event_loop(loop)
-    #
-    # #TODO run nest in a different process with x process counts
-    # print("Run run run")
-    # server.start(loop)
+    loop = async_loop.new_event_loop()
+    asyncio.set_event_loop(loop)
+
+    #TODO run nest in a different process with x process counts
+    print("Run run run")
+    server.start(loop)
