@@ -3,6 +3,8 @@ import logging
 
 
 host = "192.168.0.69"
+port = 8080
+
 
 elastic_search = {
     'host': '192.168.0.10',
@@ -11,8 +13,6 @@ elastic_search = {
 
 
 enable_security = False
-
-
 
 #======Controller============
 workers = 1

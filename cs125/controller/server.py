@@ -17,4 +17,4 @@ app.blueprint(main.bp)
 
 def start(loop = None):
     logger.info("Starting api server...")
-    app.run(host=config.host, port=8000, workers=config.workers, debug=True, loop=loop)
+    app.run(host=config.host, port=config.port, workers=config.workers, debug=True, loop=loop)

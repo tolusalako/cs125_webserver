@@ -20,6 +20,9 @@ def str_to_bool(string):
 
 class StoreView(HTTPMethodView):
     def post(self, request):
+        if (request.body is None):
+            raise InvalidUsage('Body cant be empty.')
+
         logger.debug(str(request.body))
         data = ujson.loads(str(request.body, 'utf-8'))
         es_util.index(data)
@@ -30,14 +33,13 @@ class FetchView(HTTPMethodView):
     def get(self, request):
         logger.debug(request.args)
         result = []
-        if (result == 'area'):
-            res = es_util.search('area', '1000')
+        for kw in request.args:
+            res = es_util.search(kw, request.args[kw][0])
             hits = res['hits']
             count = hits['total']
             results = hits['hits']
             for res in results:
                 result.append(res['_source'])
-
         return text(str(result))
 
 bp = Blueprint('mail')

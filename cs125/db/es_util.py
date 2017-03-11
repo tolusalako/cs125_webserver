@@ -1,4 +1,5 @@
 import config
+import uuid
 from elasticsearch import Elasticsearch
 
 es = None
@@ -14,7 +15,7 @@ def getClient():
     return es
 
 def index(data):
-    es.index(index=index_name, doc_type='tag', id=1, body=data)
+    es.index(index=index_name, doc_type='tag', id=str(uuid.uuid1()), body=data)
 
 def search(kw, val):
     return es.search(
