@@ -1,6 +1,7 @@
 import config
 import uuid
-from elasticsearch import Elasticsearch
+from elasticsearch import Elasticsearch, RequestsHttpConnection
+from requests_aws4auth import AWS4Auth
 
 es = None
 index_name = config.elastic_search['index']
