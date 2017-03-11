@@ -30,5 +30,12 @@ def search(kw, val):
 
 def setup():
     global es
-    es = Elasticsearch([config.elastic_search['host']])
+    awsauth = AWS4Auth(config.aws['access_key'], config.aws['secret_key'], config.aws['region'], 'es')
+    es = Elasticsearch(
+        hosts=[{'host': config.elastic_search['host'], 'port': config.elastic_search['port']}],
+        http_auth=awsauth,
+        use_ssl=True,
+        verify_certs=True,
+        connection_class=RequestsHttpConnection
+    )
     print(index_name)

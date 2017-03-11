@@ -8,7 +8,14 @@ port = 8080
 
 elastic_search = {
     'host': '192.168.0.10',
+    'port': 443,
     'index': 'cs125'
+}
+
+aws = {
+    'access_key': '',
+    'secret_key': '',
+    'region': ''
 }
 
 
