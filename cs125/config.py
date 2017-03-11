@@ -8,8 +8,9 @@ port = 8080
 
 elastic_search = {
     'host': '192.168.0.10',
-    'port': 443,
-    'index': 'cs125'
+    'port': 9200,
+    'index': 'cs125',
+    'use_aws': False
 }
 
 aws = {

@@ -42,6 +42,23 @@ class FetchView(HTTPMethodView):
                 result.append(res['_source'])
         return text(str(result))
 
+class FetchAllView(HTTPMethodView):
+    def get(self, request):
+        try:
+            from_ = int(request.args['from'][0])
+            size = int(request.args['size'][0])
+        except (KeyError, ValueError) as e:
+            raise InvalidUsage('Provide ints from and size as queries.')
+        result = []
+        res = es_util.get(from_, size)
+        hits = res['hits']
+        count = hits['total']
+        results = hits['hits']
+        for res in results:
+            result.append(res['_source'])
+        return text(str(result))
+
 bp = Blueprint('mail')
 bp.add_route(StoreView(), '/tag')
 bp.add_route(FetchView(), '/get')
+bp.add_route(FetchAllView(), '/getall')

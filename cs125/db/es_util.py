@@ -27,16 +27,27 @@ def search(kw, val):
                     kw: val
                 }
             }
-        });
+        })
+
+def get(from_=0, size=50):
+    return es.search(
+        index=index_name,
+        body={
+            "from" : from_, "size" : size,
+            # "query" : {
+            #     "term" : { "user" : "kimchy" }
+            # }
+        })
+
 
 def setup():
     global es
     awsauth = AWS4Auth(config.aws['access_key'], config.aws['secret_key'], config.aws['region'], 'es')
     es = Elasticsearch(
         hosts=[{'host': config.elastic_search['host'], 'port': config.elastic_search['port']}],
-        http_auth=awsauth,
-        use_ssl=True,
-        verify_certs=True,
+        http_auth=awsauth if config.elastic_search['use_aws'] else None,
+        use_ssl=config.elastic_search['use_aws'],
+        verify_certs=config.elastic_search['use_aws'],
         connection_class=RequestsHttpConnection
     )
     print(index_name)
