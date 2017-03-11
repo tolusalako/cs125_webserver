@@ -20,6 +20,7 @@ def str_to_bool(string):
 
 class StoreView(HTTPMethodView):
     def post(self, request):
+        logger.debug(str(request.body))
         data = ujson.loads(str(request.body, 'utf-8'))
         es_util.index(data)
         return json({'message': "ok"})
@@ -27,7 +28,7 @@ class StoreView(HTTPMethodView):
 
 class FetchView(HTTPMethodView):
     def get(self, request):
-        print(request.args)
+        logger.debug(request.args)
         result = []
         if (result == 'area'):
             res = es_util.search('area', '1000')
