@@ -22,6 +22,9 @@ def search(kw, val):
     return es.search(
         index=index_name,
         body={
+            "sort" : [
+                { "time" : {"order" : "desc"}},
+            ],
             "query": {
                 "match": {
                     kw: val
@@ -50,4 +53,4 @@ def setup():
         verify_certs=config.elastic_search['use_aws'],
         connection_class=RequestsHttpConnection
     )
-    print(index_name)
+    es.indices.refresh(index=index_name)
