@@ -5,7 +5,7 @@ __Requirements__
 
 
 __Run__
-`pip install requirements.txt
-python cs125/__main__.py`
+`pip install requirements.txt`   
+`python cs125/__main__.py`
 
 
